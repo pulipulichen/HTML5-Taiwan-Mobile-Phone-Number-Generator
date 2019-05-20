@@ -77,12 +77,31 @@ var app = new Vue({
       let filename = this.count + 'MobilePhoneNumbers-' + DateHelper.getCurrentTimeString() + '.' + filetypeExt
       let content = this.phoneNumbers
       
-      if (filetypeExt === 'csv') {
-        content = 'Mobile Phone Numbers\n' + content
+      if (['csv', 'txt'].indexOf(filetypeExt) > -1) {
+        if (filetypeExt === 'csv') {
+          content = 'Mobile Phone Numbers\n' + content
+        }
+
+        DownloadHelper.downloadAsFile(filename, content)
+        //console.log(this.phoneNumbers)
       }
-      
-      DownloadHelper.downloadAsFile(filename, content)
-      //console.log(this.phoneNumbers)
+      else if (filetypeExt === 'ods') {
+        let data = {
+          "data": []
+        }
+        
+        content.split('\n').forEach((line) => {
+          if (typeof(line) !== 'string' || line.trim() === '') {
+            return
+          }
+          line = line.trim()
+          data.data.push({
+            'Mobile Phone Numbers': line
+          })
+        })
+        
+        xlsx_helper_ods_download(filename, data)
+      }
     }
   }
   /*

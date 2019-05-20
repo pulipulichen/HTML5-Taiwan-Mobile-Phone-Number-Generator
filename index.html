@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Taiwan Mobile Phone Number Generator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="vendors/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="vendors/semantic-ui/semantic.min.css">
+    <script src="vendors/semantic-ui/semantic.min.js"></script>
+    
+    <script src="vendors/vue/vue.js"></script>
+    
+    <script src="vendors/js-xlsx/shim.min.js"></script>
+    <script src="vendors/js-xlsx/xlsx.full.min.js"></script>
+    <script src="vendors/js-xlsx/Blob.js"></script>
+    <script src="vendors/js-xlsx/FileSaver.js"></script>
+    <script src="vendors/js-xlsx/xlsx-helper.js"></script>
+    
+    <link rel="icon" type="image/png" href="icon.png" />
+  </head>
+  <body>
+    <div id="TaiwanMobilePhoneNumberGenerator"
+         ref="modal">
+      <form class="ui form">
+        <div class="three fields">
+          <div class="field">
+            <label>Count</label>
+            <input v-model="count" type="number" @change="persist" />
+          </div>
+          <div class="field">
+            <label>File Type</label>
+            <div class="ui selection dropdown">
+              <input type="hidden" name="fileType" v-model="fileType" @change="persist" />
+              <i class="dropdown icon"></i>
+              <div class="default text">File Type</div>
+              <div class="menu">
+                <div class="item" data-value="csv">Comma-Separated Values (.csv)</div>
+                <div class="item" data-value="ods">OpenDocument Spreadsheet (.ods)</div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label>&nbsp;</label>
+            <button type="button"
+                    class="ui labeled icon fluid green button" 
+                    @click="download">
+              <i class="download icon"></i>
+              DOWNLOAD
+            </button>
+          </div>
+        </div>
+        
+        <textarea v-model="phoneNumbers" onfocus="this.select()"></textarea>
+      </form>
+    </div>
+    
+    <script src="script.js"></script>
+  </body>
+</html>

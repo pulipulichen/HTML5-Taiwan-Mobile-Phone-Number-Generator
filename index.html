@@ -17,30 +17,50 @@
     <script src="vendors/js-xlsx/FileSaver.js"></script>
     <script src="vendors/js-xlsx/xlsx-helper.js"></script>
     
+    <script src="helpers/DownloadHelper.js"></script>
+    <script src="helpers/DateHelper.js"></script>
+    
     <link rel="icon" type="image/png" href="icon.png" />
   </head>
   <body>
     <div id="TaiwanMobilePhoneNumberGenerator"
          ref="modal">
       <form class="ui form">
-        <div class="three fields">
-          <div class="field">
+        <div class="four fields">
+          <div class="three wide field">
             <label>Count</label>
             <input v-model="count" type="number" @change="persist" />
           </div>
-          <div class="field">
+          <div class="three wide field">
+            <label>&nbsp;</label>
+            <button type="button"
+                    class="ui fluid button" 
+                    @click="reset">
+              RESET
+            </button>
+          </div>
+          <div class="seven wide field">
             <label>File Type</label>
+            <!--
             <div class="ui selection dropdown">
-              <input type="hidden" name="fileType" v-model="fileType" @change="persist" />
+              <input type="hidden"  />
               <i class="dropdown icon"></i>
               <div class="default text">File Type</div>
               <div class="menu">
                 <div class="item" data-value="csv">Comma-Separated Values (.csv)</div>
                 <div class="item" data-value="ods">OpenDocument Spreadsheet (.ods)</div>
               </div>
+              
+              
             </div>
+            -->
+            <select name="fileType" v-model="fileType" @change="persist">
+              <option value="csv">Comma-Separated Values (.csv)</option>
+              <option value="txt">Plain Text (.txt)</option>
+              <option value="ods">OpenDocument Spreadsheet (.ods)</option>
+            </select>
           </div>
-          <div class="field">
+          <div class="three wide field">
             <label>&nbsp;</label>
             <button type="button"
                     class="ui labeled icon fluid green button" 
